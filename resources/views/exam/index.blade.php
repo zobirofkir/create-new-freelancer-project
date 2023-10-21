@@ -27,8 +27,13 @@
     @foreach($getExam as $student)
         <div class="bg-transparent rounded-lg shadow-lg p-6">
             <div class="flex flex-col items-center pb-10">
-                <img class="w-24 h-24 mb-3 rounded-full shadow-lg" src="{{ asset('storage/' . $student->image) }}" alt="{{ $student->first_name }} {{ $student->last_name }}" />
-                <h5 class="mb-1 text-xl font-medium text-white text-center">{{ $student->title }}</h5>
+                
+            <img class="w-24 h-24 mb-3 rounded-full shadow-lg"
+            src="{{ asset('storage/' . $student->image) }}"
+            alt="{{ $student->first_name }} {{ $student->last_name }}"
+            onerror="this.src='https://img.freepik.com/vecteurs-libre/illustration-icone-avatar-utilisateur_53876-5907.jpg?w=740&t=st=1697924836~exp=1697925436~hmac=736284791f84e784e95cd206009240b391126c6798d53d0aeada0cdc39e7df1a'" />
+
+            <h5 class="mb-1 text-xl font-medium text-white text-center">{{ $student->title }}</h5>
                 <span class="text-sm text-white text-center">
                     {{ strlen($student->description) > 20 ? substr($student->description, 0, 20) . '...' : $student->description }}
                 </span>
@@ -36,10 +41,10 @@
                 <span class="text-sm text-white text-center">{{ $student->exam_time }}</span>
 
                 <div class="flex mt-4 space-x-3 justify-center">
-                    <a href="mailto:{{ $student->email }}" class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-gray-900 bg-transparent border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 text-white">Message</a>
+                    <a href="mailto:{{ $student->email }}" class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-gray-900 bg-transparent border border-gray-300 rounded-lg hover:bg-dark-100 focus:ring-4 focus:outline-none focus:ring-gray-200 text-white">Message</a>
                 </div>
                 <div class="flex mt-4 space-x-3 justify-center">
-                    <a href="{{route('show.exam', ['id' => $student->id])}}" class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-gray-900 bg-transparent border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 text-white">Show</a>
+                    <a href="{{route('show.exam', ['id' => $student->id])}}" class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-dark-900 bg-transparent border border-gray-300 rounded-lg hover:bg-dark-100 focus:ring-4 focus:outline-none focus:ring-gray-200 text-white">Show</a>
                 </div>
 
 

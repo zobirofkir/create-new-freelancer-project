@@ -26,7 +26,7 @@
                     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 justify-center items-center">
                         <div class="bg-transparent rounded-lg shadow-lg py-6">
                             <div class="flex flex-col items-center pb-10">
-                                <img class="w-24 h-24 mb-3 rounded-full shadow-lg" src="{{ asset('storage/' . $student->image) }}" alt="{{ $student->first_name }} {{ $student->last_name }}"/>
+                                <img class="w-24 h-24 mb-3 rounded-full shadow-lg" src="{{ asset('storage/' . $student->image) }}" alt="{{ $student->first_name }} {{ $student->last_name }}" onerror="this.src='https://img.freepik.com/vecteurs-libre/illustration-icone-avatar-utilisateur_53876-5907.jpg?w=740&t=st=1697924836~exp=1697925436~hmac=736284791f84e784e95cd206009240b391126c6798d53d0aeada0cdc39e7df1a'" />
                                 <h5 class="mb-1 text-xl font-medium text-white">{{ $student->first_name }} {{ $student->last_name }}</h5>
                                 <span class="text-sm text-white">{{ $student->date_of_birth }}</span>
                                 <span class="text-sm text-white">{{ $student->email }}</span>

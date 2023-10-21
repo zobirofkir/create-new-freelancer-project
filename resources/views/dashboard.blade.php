@@ -19,13 +19,14 @@
         <div class="py-6 min-h-screen custom-bg-image flex items-center justify-center">
             <div class="container mx-auto px-4 sm:px-6 lg:px-8">
                 <h3 class="text-2xl font-semibold text-white mb-4 text-center">{{ __('Students') }}</h3>
-
                 <form action="{{ route('search.students') }}" method="GET" class="mb-4">
-                    <div class="flex justify-center">
-                        <input type="text" name="query" placeholder="Search students" class="rounded-l-lg py-2 px-4 border-t mr-0 border-b border-l text-gray-800 border-gray-200 bg-white" />
-                        <button type="submit" class="px-4 rounded-r-lg border border-green-500 bg-green-500 text-white border-b border-t border-r">
-                            Search
-                        </button>
+                    <div class="md:flex justify-center">
+                        <div class="relative">
+                            <input type="text" name="query" placeholder="Search students" class="w-full md:w-64 h-10 pl-3 pr-10 py-2 rounded-full border border-gray-300 text-gray-800 placeholder-gray-400 focus:outline-none focus:border-green-500 bg-white" />
+                            <button type="submit" class="absolute right-0 top-0 h-10 w-16 bg-green-500 text-white rounded-full hover:bg-green-600 transition duration-300" style="color: black; font-weight: 900;">
+                                Search
+                            </button>
+                        </div>
                     </div>
                 </form>
                 <div class="py-6" style="background-image: url('https://img.freepik.com/photos-gratuite/concept-fond-studio-fond-salle-studio-violet-degrade-clair-vide-abstrait-pour-produit-fond-studio-uni_1258-63886.jpg?w=996&t=st=1697874564~exp=1697875164~hmac=40578bd3151a1b2f6ee95929829bd77de7c20a4b10c4a400e09c7feb2db488ac'); background-size: cover;">
@@ -36,19 +37,18 @@
                             @foreach($students as $student)
                                 <div class="bg-transparent rounded-lg shadow-lg py-6">
                                     <div class="flex flex-col items-center pb-10">
-                                        <img class="w-24 h-24 mb-3 rounded-full shadow-lg" src="{{ asset('storage/' . $student->image) }}" alt="{{ $student->first_name }} {{ $student->last_name }}"/>
+                                    <img class="w-24 h-24 mb-3 rounded-full shadow-lg" src="{{ asset('storage/' . $student->image) }}" alt="{{ $student->first_name }} {{ $student->last_name }}" onerror="this.src='https://img.freepik.com/vecteurs-libre/illustration-icone-avatar-utilisateur_53876-5907.jpg?w=740&t=st=1697924836~exp=1697925436~hmac=736284791f84e784e95cd206009240b391126c6798d53d0aeada0cdc39e7df1a'" />
                                         <h5 class="mb-1 text-xl font-medium text-white text-center">{{ $student->first_name }} {{ $student->last_name }}</h5>
                                         <span class="text-sm text-white text-center">{{ $student->email }}</span>
                                         <div class="flex mt-4 space-x-3 justify-center">
                                             <a href="mailto:{{ $student->email }}" class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-gray-900 bg-transparent border border-gray-300 rounded-lg hover:bg-black-100 focus:ring-4 focus:outline-none focus:ring-gray-200" style="color: white;">Message</a>
-                                            @if(auth()->check() && auth()->user()->email === 'admin.firoz@mail.com')
-                                                <div class="flex items-center space-x-4">
+                                            <a href="{{ route('show.student', ['id' => $student->id]) }}" class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-black rounded-lg hover:bg-black-800 focus:ring-4 focus:outline-none focus:ring-blue-300">Show</a>
+                                        </div>                                            
+                                        @if(auth()->check() && auth()->user()->email === 'admin.firoz@mail.com')
+                                                <div class="flex items-center space-x-4" style="margin-top: 30px;">
                                                     <a href="{{ route('students.edit', ['id' => $student->id]) }}" class="px-4 py-2 text-sm font-medium text-white bg-blue-500 rounded-lg hover:bg-blue-600 focus:ring-4 focus:ring-blue-300 focus:outline-none">
                                                         Edit
-                                                    </a>
-
-                                                    <br>
-                                                    
+                                                    </a>                                                    
                                                     <a href="{{ route('students.destroy', $student) }}" onclick="event.preventDefault(); document.getElementById('delete-form').submit();" class="px-4 py-2 text-sm font-medium text-white bg-red-500 rounded-lg hover:bg-red-600 focus:ring-4 focus:ring-red-300 focus:outline-none cursor-pointer">
                                                         Delete Student
                                                     </a>
@@ -59,9 +59,6 @@
                                                     @method('DELETE')
                                                 </form>
                                             @endif
-                                            <a href="{{ route('show.student', ['id' => $student->id]) }}" class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-black rounded-lg hover:bg-black-800 focus:ring-4 focus:outline-none focus:ring-blue-300">Show</a>
-                                        </div>                                            
-
                                     </div>
                                 </div>
                             @endforeach
